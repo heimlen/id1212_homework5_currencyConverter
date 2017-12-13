@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/convert_to"
         android:textColor="@android:color/darker_gray"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/convert_from"
         android:textColor="@android:color/darker_gray"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,20 +36,22 @@
 
     <Button
         android:id="@+id/convert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_width="129dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@android:color/holo_blue_bright"
         android:text="@string/convert"
         android:textColor="@android:color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/convertToSpinner"
+        style="@style/Widget.AppCompat.Spinner"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -60,21 +62,9 @@
         app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertToTextView"
-        app:layout_constraintVertical_bias="0.152" />
-
-    <Spinner
-        android:id="@+id/convertFromSpinner"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/convertToTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/convertFromTextView"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintVertical_bias="0.152"
+        android:theme="@style/Spinner"
+        />
 
     <EditText
         android:id="@+id/amount"
@@ -89,11 +79,27 @@
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/convert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertToSpinner"
         app:layout_constraintVertical_bias="0.523" />
+
+    <Spinner
+        android:id="@+id/convertFromSpinner"
+        style="@style/Widget.AppCompat.Spinner"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:theme="@style/Spinner"
+        app:layout_constraintBottom_toTopOf="@+id/convertToTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/convertFromTextView"
+        app:layout_constraintVertical_bias="0.508" />
 
 </android.support.constraint.ConstraintLayout>

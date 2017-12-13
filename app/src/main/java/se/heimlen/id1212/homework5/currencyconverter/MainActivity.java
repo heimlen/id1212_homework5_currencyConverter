@@ -1,5 +1,6 @@
 package se.heimlen.id1212.homework5.currencyconverter;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +29,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private JSONObject jsonObject;
     private JSONObject exchangeRates;
-    private JSONArray currencyNames;
     private ArrayList<String> exchangeRatesName;
 
     @Override
@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
         new DownloadJSON().execute();
     }
-    //TODO Create new methods setupUI(), convert(), etc. and remove code that has not to do with downloading
-    //json from DownloadJSON class,
+
     /**
      * inner class that extends AsyncTask to ensure multithreaded UI
      */
+
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 exchangeRatesName.add(jsonObject.getString("base"));
                 exchangeRates = jsonObject.getJSONObject("rates");
-                currencyNames = exchangeRates.names();
+                JSONArray currencyNames = exchangeRates.names();
                 exchangeRates.put("EUR", 1.0);
                 for(int i = 0; i < currencyNames.length(); i++) {
                     exchangeRatesName.add(currencyNames.getString(i));
@@ -68,9 +68,14 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
+        /**
+         * After the conversion rates have been downloaded we set up the rest of the UI on the UI Thread,
+         * by utilizing onPostExecute, which runs on the UI Thread.
+         * @param args Void
+         */
         @Override
         protected void onPostExecute(Void args) {
-            // Locate the spinner in activity_main.xml
+            //Locate ui elements in activity_main.xml
             final Spinner convertFrom = findViewById(R.id.convertFromSpinner);
             final Spinner convertTo = findViewById(R.id.convertToSpinner);
             final EditText amount = findViewById(R.id.amount);
@@ -81,12 +86,15 @@ public class MainActivity extends AppCompatActivity {
                             android.R.layout.simple_spinner_dropdown_item,
                             exchangeRatesName));
 
+
             convertTo.setAdapter(new ArrayAdapter<>(MainActivity.this,
                             android.R.layout.simple_spinner_dropdown_item,
                             exchangeRatesName));
 
+
+            //Start listening for clicks on convert button
             convert.setOnClickListener(new View.OnClickListener() {
-                //TODO move this out of the download class.
+
                 @Override
                 public void onClick(View view) {
                     String currencyFrom = convertFrom.getSelectedItem().toString();
@@ -95,11 +103,19 @@ public class MainActivity extends AppCompatActivity {
                     double cFrom = exchangeRates.optDouble(currencyFrom);
                     double cTo = exchangeRates.optDouble(currencyTo);
 
-                    double endResult = convertAmount * (cTo / cFrom);
+                    double resultAmount = convertAmount * (cTo / cFrom);
 
-                    String endResults = "Endresult is " + String.valueOf(endResult);
+                    String endResults = "Endresult is " + String.valueOf(resultAmount);
 
-                    Toast.makeText(MainActivity.this,endResults,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MainActivity.this,endResults,Toast.LENGTH_LONG).show();
+
+                    //Load resultview
+                    Intent it = new Intent(MainActivity.this, ResultActivity.class);
+                    it.putExtra("currencyFrom",currencyFrom);
+                    it.putExtra("currencyTo",currencyTo);
+                    it.putExtra("convertAmount",convertAmount);
+                    it.putExtra("resultAmount",resultAmount);
+                    startActivity(it);
                 }
             });
         }

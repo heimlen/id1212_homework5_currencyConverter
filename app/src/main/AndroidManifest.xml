@@ -20,6 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ResultActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.RESULT" />
+
+                <category android:name="android.intent.category.RESULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
