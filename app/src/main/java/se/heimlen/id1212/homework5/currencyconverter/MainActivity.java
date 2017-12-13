@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                             exchangeRatesName));
 
             convert.setOnClickListener(new View.OnClickListener() {
-
+                //TODO move this out of the download class.
                 @Override
                 public void onClick(View view) {
                     String currencyFrom = convertFrom.getSelectedItem().toString();
