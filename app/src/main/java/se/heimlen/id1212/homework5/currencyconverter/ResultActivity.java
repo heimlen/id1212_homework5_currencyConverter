@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.util.Formatter;
 
 /**
- * Created by heimlen on 2017-12-12.
+ * Activity to showcase the result of the conversion to the user.
  */
 
 public class ResultActivity extends AppCompatActivity {

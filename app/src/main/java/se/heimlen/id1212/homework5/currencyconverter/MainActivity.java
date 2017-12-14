@@ -100,14 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     String currencyFrom = convertFrom.getSelectedItem().toString();
                     String currencyTo = convertTo.getSelectedItem().toString();
                     double convertAmount = Double.valueOf(amount.getText().toString());
-                    double cFrom = exchangeRates.optDouble(currencyFrom);
-                    double cTo = exchangeRates.optDouble(currencyTo);
-
-                    double resultAmount = convertAmount * (cTo / cFrom);
-
-                    String endResults = "Endresult is " + String.valueOf(resultAmount);
-
-                    //Toast.makeText(MainActivity.this,endResults,Toast.LENGTH_LONG).show();
+                    double resultAmount = convert(currencyFrom, currencyTo, convertAmount);
 
                     //Load resultview
                     Intent it = new Intent(MainActivity.this, ResultActivity.class);
@@ -116,6 +109,14 @@ public class MainActivity extends AppCompatActivity {
                     it.putExtra("convertAmount",convertAmount);
                     it.putExtra("resultAmount",resultAmount);
                     startActivity(it);
+                }
+
+                private double convert(String currencyFrom, String currencyTo, double convertAmount) {
+                    double cFrom = exchangeRates.optDouble(currencyFrom);
+                    double cTo = exchangeRates.optDouble(currencyTo);
+
+                    return convertAmount * (cTo / cFrom);
+
                 }
             });
         }
